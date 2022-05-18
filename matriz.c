@@ -25,11 +25,10 @@ void print_matriz(matriz mat) {
 		printf("{%d,%d}\n", mat.dados[i][0], mat.dados[i][1]);
 }
 
-// converte um arquivo .csv formatado para matriz
-matriz txt2matriz(FILE *arquivo) {
+// conta a quantidade de linhas no arquivo
+int quantas_linhas(FILE *arquivo) {
 	int qtd_linhas = 0;
 	char chr;
-	// conta a quantidade de linhas no arquivo
 	rewind(arquivo);
 	do {
 		chr = fgetc(arquivo);
@@ -37,6 +36,13 @@ matriz txt2matriz(FILE *arquivo) {
 			qtd_linhas++;
 	} while(chr != EOF);
 	rewind(arquivo);
+
+	return qtd_linhas;
+}
+
+// converte um arquivo .csv formatado para matriz
+matriz txt2matriz(FILE *arquivo) {
+	int	qtd_linhas = quantas_linhas(arquivo);	
 
 	// inicia matriz
 	matriz mat;
@@ -52,6 +58,7 @@ matriz txt2matriz(FILE *arquivo) {
 
 // sobrescreve arquivo com conteudos de uma matriz
 void matriz2txt(matriz mat, FILE *arquivo, char *filepath) {
+	// apaga conteudo original do arquivo
 	if (freopen(filepath, "w", arquivo) == 0) {
 		printf("O arquivo nao pode ser sobrescrito");
 		return;
