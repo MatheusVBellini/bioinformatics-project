@@ -25,6 +25,43 @@ void print_matriz(matriz mat) {
 		printf("{%d,%d}\n", mat.dados[i][0], mat.dados[i][1]);
 }
 
+// converte um arquivo .csv formatado para matriz
+matriz txt2matriz(FILE *arquivo) {
+	int qtd_linhas = 0;
+	char chr;
+	// conta a quantidade de linhas no arquivo
+	rewind(arquivo);
+	do {
+		chr = fgetc(arquivo);
+		if (chr == '\n')
+			qtd_linhas++;
+	} while(chr != EOF);
+	rewind(arquivo);
+
+	// inicia matriz
+	matriz mat;
+	nova_matriz(&mat, qtd_linhas);
+
+	// le arquivo em matriz
+	for (int i = 0; i < mat.tamanho; i++) {
+		fscanf(arquivo, "%d,%d\n", &mat.dados[i][0], &mat.dados[i][1]);
+	}
+
+	return mat;
+}
+
+// sobrescreve arquivo com conteudos de uma matriz
+void matriz2txt(matriz mat, FILE *arquivo, char *filepath) {
+	if (freopen(filepath, "w", arquivo) == 0) {
+		printf("O arquivo nao pode ser sobrescrito");
+		return;
+	}
+
+	for (int i = 0; i < mat.tamanho; i++) {
+		fprintf(arquivo, "%d,%d\n", mat.dados[i][0], mat.dados[i][1]);
+	}
+}
+
 // ordena numeros em relacao a um digito especifico
 void OrdenaDigitos(matriz A, int posicao) {
 	// inicia B com zeros
