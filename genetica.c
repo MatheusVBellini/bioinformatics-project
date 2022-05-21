@@ -67,29 +67,24 @@ char *cond_txt2string(FILE *arquivo, char condicao) {
 
 	// esreve o arquivo na string
 	char chr = fgetc(arquivo);
+	// se EOF for a primeiro caracter lido, retorna uma string EOF para sinalizar final
 	if (chr == EOF)
-		goto end_of_file_no_string;
+		return "EOF";
 	while (chr != condicao) {
 		string[0] = chr;
 		string = (char *)realloc(string, (++tam)*sizeof(char)); // aumenta o tamanho da string para novos caracteres
 		chr = fgetc(arquivo);
-		if (chr == EOF)
-			goto end_of_file_with_string;
+		// se EOF for encontrado antes da condicao de parada, retorna string ate ele
+		if (chr == EOF) {
+			string[tam-1] = '\0';
+			return string;
+		}
 	}
 	
 	// coloca token de finalizacao na string
 	string[tam-1] = '\0';
 
 	return string;
-	
-	// se EOF for encontrado antes da condicao de parada, retorna string ate ele
-	end_of_file_with_string:
-	string[tam-1] = '\0';
-	return string;
-	
-	// se EOF for a primeiro caracter lido, retorna uma string EOF para sinalizar final
-	end_of_file_no_string:
-	return "EOF";
 }
 
 // informa a posicao dos trechos estao no texto de entrada
