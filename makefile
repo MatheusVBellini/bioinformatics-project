@@ -1,2 +1,2 @@
 target:
-	gcc -o exec matriz.c main.c
+	gcc -o exec genetica.c matriz.c main.c
