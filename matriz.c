@@ -58,16 +58,17 @@ void matriz2txt(matriz mat, FILE *arquivo, char *filepath) {
 // ordena numeros em relacao a um digito especifico
 void OrdenaDigitos(matriz A, int posicao) {
 	// inicia B com zeros
-	int* B = (int *)calloc(10, sizeof(int));
+	int* B = (int *)calloc(19, sizeof(int));
 	int digito, i;
 	
 	// conta a frequencia de digitos de 0 a 9
 	for (i = 0; i < A.tamanho; i++) {
 		digito = A.dados[i][0] / posicao;
 		digito %= 10;
+		digito += 9;
 		B[digito]++;
 	}
-	for (i = 1; i <= 9; i++) {
+	for (i = 1; i < 19; i++) {
 		B[i] += B[i - 1];
 	}
 
@@ -77,6 +78,7 @@ void OrdenaDigitos(matriz A, int posicao) {
 	for (i = A.tamanho-1; i >= 0; i--) {
 		digito = A.dados[i][0] / posicao;
 		digito %= 10;
+		digito += 9;
 		B[digito]--;
 		C.dados[B[digito]][0] = A.dados[i][0];
 		C.dados[B[digito]][1] = A.dados[i][1];
