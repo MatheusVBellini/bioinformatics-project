@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "matriz.h"
+#include "genetica.h"
 
 // cria uma instancia de matriz
 void nova_matriz(matriz* mat, int tam) {
@@ -23,21 +24,6 @@ void destruir_matriz(matriz* mat) {
 void print_matriz(matriz mat) {
 	for (int i = 0; i < mat.tamanho; i++)
 		printf("{%d,%d}\n", mat.dados[i][0], mat.dados[i][1]);
-}
-
-// conta a quantidade de linhas no arquivo
-int quantas_linhas(FILE *arquivo) {
-	int qtd_linhas = 0;
-	char chr;
-	rewind(arquivo);
-	do {
-		chr = fgetc(arquivo);
-		if (chr == '\n')
-			qtd_linhas++;
-	} while(chr != EOF);
-	rewind(arquivo);
-
-	return qtd_linhas;
 }
 
 // converte um arquivo .csv formatado para matriz

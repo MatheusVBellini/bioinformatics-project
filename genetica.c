@@ -4,6 +4,21 @@
 #include "matriz.h"
 #include "genetica.h"
 
+// conta a quantidade de linhas no arquivo
+int quantas_linhas(FILE *arquivo) {
+	int qtd_linhas = 0;
+	char chr;
+	rewind(arquivo);
+	do {
+		chr = fgetc(arquivo);
+		if (chr == '\n')
+			qtd_linhas++;
+	} while(chr != EOF);
+	rewind(arquivo);
+
+	return qtd_linhas;
+}
+
 void ContagemIntersecoes(FILE *A, FILE *B, int nA, int nB, FILE *out) {
 	// inicia contagem com zeros
 	int *contagens = (int *)calloc(nA, sizeof(int));
