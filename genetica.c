@@ -124,7 +124,8 @@ void ContagemLeituras(FILE *arquivo_genoma, FILE *arquivo_pos_genes, FILE *arqui
 	
 	// encontra a posição dos fragmentos para checar interseções com os genes
 	CtrlF(arquivo_genoma, arquivo_fragmentos, arquivo_pos_fragmentos);
+	arquivo_pos_fragmentos = freopen("arquivos/saida/atividade_genica_pequeno.txt", "r", arquivo_pos_fragmentos);
 
 	// conta a quantidade de interseções entre os fragmentos e os genes
-	ContagemIntersecoes (arquivo_pos_genes, arquivo_pos_fragmentos, n_genes, n_fragmentos, arquivo_saida);
+	ContagemIntersecoes(arquivo_pos_genes, arquivo_pos_fragmentos, n_genes, n_fragmentos, arquivo_saida);
 }
