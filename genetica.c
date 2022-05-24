@@ -19,6 +19,7 @@ int quantas_linhas(FILE *arquivo) {
 	return qtd_linhas;
 }
 
+// conta a quantidade de intersecções dos intervalos de B nos de A
 void ContagemIntersecoes(FILE *A, FILE *B, int nA, int nB, FILE *out) {
 	// inicia contagem com zeros
 	int *contagens = (int *)calloc(nA, sizeof(int));
@@ -117,4 +118,13 @@ void CtrlF(FILE *arq_texto, FILE *arq_trechos, FILE *out) {
 		}
 		trecho = cond_txt2string(arq_trechos, '\n');
 	}
+}
+
+void ContagemLeituras(FILE *arquivo_genoma, FILE *arquivo_pos_genes, FILE *arquivo_fragmentos, FILE *arquivo_pos_fragmentos, int n_genes, int n_fragmentos, FILE *arquivo_saida) {
+	
+	// encontra a posição dos fragmentos para checar interseções com os genes
+	CtrlF(arquivo_genoma, arquivo_fragmentos, arquivo_pos_fragmentos);
+
+	// conta a quantidade de interseções entre os fragmentos e os genes
+	ContagemIntersecoes (arquivo_pos_genes, arquivo_pos_fragmentos, n_genes, n_fragmentos, arquivo_saida);
 }

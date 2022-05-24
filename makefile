@@ -1,2 +1,6 @@
+CC = gcc
+OUT = exec
+FILES = genetica.c matriz.c main.c
+
 target:
-	gcc -o exec genetica.c matriz.c main.c
+	${CC} -o ${OUT} ${FILES}

@@ -1,9 +1,10 @@
 #ifndef MATRIZ_H
 #define MATRIZ_H
 
+// matriz n por 2
 typedef struct {
-	int** dados;
-	int tamanho;
+	int** dados; // valores da matriz
+	int tamanho; // numero de pares de valor 
 }matriz;
 
 void nova_matriz(matriz* mat, int tam);
