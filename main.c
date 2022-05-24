@@ -14,8 +14,8 @@ int main () {
 	FILE *pos_fragmentos = fopen("arquivos/saida/pos_fragmentos_pequeno.txt", "w");
 	FILE *saida = fopen("arquivos/saida/atividade_genica_pequeno.txt", "w");
 	int n_genes = quantas_linhas(pos_genes); 
-	int n_fragmentos = quantas_linhas(fragmentos); 
-
+	int n_fragmentos = quantas_linhas(fragmentos);
+	
 	// aplica o algoritmo para verificar atividade gênica
 	ContagemLeituras(genoma, pos_genes, fragmentos, pos_fragmentos, n_genes, n_fragmentos, saida);
 
