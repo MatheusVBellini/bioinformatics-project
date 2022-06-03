@@ -1,4 +1,4 @@
-#define TESTE 2
+#define TESTE 1
 
 #include <stdio.h>
 #include <time.h>
