@@ -88,8 +88,6 @@ int main () {
 	printf("Grande: %lfs\n", (double)ciclos_3/CLOCKS_PER_SEC);
 
 	// fecha os arquivos após processá-los
-fecha_arquivos: 
-
 	fclose(genoma_pequeno); 
 	fclose(genoma_medio); 
 	fclose(genoma_grande); 
