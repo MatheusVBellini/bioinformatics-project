@@ -1,4 +1,4 @@
-#define TESTE 1
+#define TESTE 0
 
 #include <stdio.h>
 #include <time.h>
@@ -43,12 +43,41 @@ int main () {
 	int n_fragmentos_medio = quantas_linhas(fragmentos_medio);
 	int n_fragmentos_grande = quantas_linhas(fragmentos_grande);
 
-	/* GENE MAIS ATIVO */
+	clock_t ciclos_init, ciclos_1, ciclos_2, ciclos_3, ciclos_4;
+
+	/* ANÁLISE EMPÍRICA DE COMPLEXIDADE -- OrdenaNumeros */
+	int repeticoes = 10;
+	double tempo3 = 0, tempo4 = 0, tempo5 = 0, tempo6 = 0;
+	matriz mat3, mat4, mat5, mat6;
+	if (TESTE == 0) {
+		for (int i = 0; i < repeticoes; i++) {
+			mat3 = matriz_aleatoria(1000);
+			mat4 = matriz_aleatoria(10000);
+			mat5 = matriz_aleatoria(100000);
+			mat6 = matriz_aleatoria(1000000);
+			ciclos_init = clock();
+			OrdenaNumeros(mat3);
+			ciclos_1 = clock();
+			OrdenaNumeros(mat4);
+			ciclos_2 = clock();
+			OrdenaNumeros(mat5);
+			ciclos_3 = clock();
+			OrdenaNumeros(mat6);
+			ciclos_4 = clock();
+			tempo3 += (double)(ciclos_1 - ciclos_init)/CLOCKS_PER_SEC;
+			tempo4 += (double)(ciclos_2 - ciclos_1)/CLOCKS_PER_SEC;
+			tempo5 += (double)(ciclos_3 - ciclos_2)/CLOCKS_PER_SEC;
+			tempo6 += (double)(ciclos_4 - ciclos_3)/CLOCKS_PER_SEC;
+		}
+
+		printf("teste 1e3: %lf\n", tempo3/10);
+		printf("teste 1e4: %lf\n", tempo4/10);
+		printf("teste 1e5: %lf\n", tempo5/10);
+		printf("teste 1e6: %lf\n", tempo6/10);
+	}
 
 
-
-	/* ANÁLISE EMPÍRICA DE COMPLEXIDADE */
-	clock_t ciclos_init, ciclos_1, ciclos_2, ciclos_3;
+	/* ANÁLISE EMPÍRICA DE COMPLEXIDADE -- ContagemLeituras */
 
 	switch (TESTE) {
 		case 1: // teste 1
@@ -79,13 +108,15 @@ int main () {
 			ciclos_3 = clock() - ciclos_2 - ciclos_1 - ciclos_init;
 		break;
 		default:
-			printf("O teste selecionado e invalido!\n");
+		break;
 	}
 
 	// output do teste
-	printf("Pequeno: %lfs\n", (double)ciclos_1/CLOCKS_PER_SEC);
-	printf("Medio: %lfs\n", (double)ciclos_2/CLOCKS_PER_SEC);
-	printf("Grande: %lfs\n", (double)ciclos_3/CLOCKS_PER_SEC);
+	if (TESTE == 1 || TESTE == 2 || TESTE == 3) {
+		printf("Pequeno: %lfs\n", (double)ciclos_1/CLOCKS_PER_SEC);
+		printf("Medio: %lfs\n", (double)ciclos_2/CLOCKS_PER_SEC);
+		printf("Grande: %lfs\n", (double)ciclos_3/CLOCKS_PER_SEC);
+	}
 
 	// fecha os arquivos após processá-los
 	fclose(genoma_pequeno); 

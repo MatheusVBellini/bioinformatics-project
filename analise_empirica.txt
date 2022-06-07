@@ -1,3 +1,10 @@
+## analise empirica -- OrdenaNumeros
+teste 1e3: 0.000068s
+teste 1e4: 0.000524s
+teste 1e5: 0.005093s
+teste 1e6: 0.050170s
+
+## analise empirica -- ContagemLeituras
 teste 1:
 Pequeno: 1.702413s + 1.692053s + 1.707130s => (média) 1.700532s
 Medio: 17.880995s + 17.921035s + 17.890483s => (média) 17.89750s

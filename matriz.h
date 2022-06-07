@@ -9,6 +9,7 @@ typedef struct {
 
 void nova_matriz(matriz* mat, int tam);
 void destruir_matriz(matriz* mat);
+matriz matriz_aleatoria(int tam);
 void print_matriz(matriz mat);
 matriz txt2matriz(FILE *arquivo);
 void matriz2txt(matriz mat, FILE *arquivo, char *filepath);

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "matriz.h"
 #include "genetica.h"
 
@@ -18,6 +19,22 @@ void nova_matriz(matriz* mat, int tam) {
 void destruir_matriz(matriz* mat) {
 	free(mat -> dados);
 	mat -> tamanho = 0;
+}
+
+// gera uma matriz aleatoriamente para realizacao de teste
+matriz matriz_aleatoria(int tam) {
+	matriz mat;
+	nova_matriz(&mat, tam);
+	
+	// seleciona a seed dos numeros pseudoaleatorios
+	srand(time(0));
+
+	for (int i = 0; i < tam; i++) {
+		mat.dados[i][0] = rand()%21;
+		mat.dados[i][1] = rand()%21;
+	}
+
+	return mat;
 }
 
 // mostra os dados contidos no atributo 'dados' da matriz
